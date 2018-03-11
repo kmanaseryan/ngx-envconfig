@@ -161,7 +161,7 @@ export class AppComponent {
 - `get(propertyName: string): any`. Where `propertyName` is the first level property in the corresponding config file. 
 - `getEnv(): string`. Returns the current environment
 - `isDevMode(): boolean`. Return `true` if environment is development, otherwhise `false`
-- `getApi(endpoint: string): string`. This function will only work if you have `API_ENDPOINTS` array in cofig file, which provides the list of available API endpoints. Also it assumes that the there is `CORS` boolean property in config file which tells whether the HTTP requests will be done through cross origin, if it is set to `true` then will concatenate value of `HOST_API` property to the current API endpoint from `API_ENDPOINTS` array, e.g. if `"CORS": true`, then returns `http://development.server.com/api/v1/user`, otherwhise will returns  `/api/v1/user`
+- `getApi(endpoint: string): string`. This function will only work if you have `API_ENDPOINTS` object in cofig file, which provides the list of available API endpoints. Also it assumes that the there is `CORS` boolean property in config file which tells whether the HTTP requests will be done through cross origin, if it is set to `true` then will concatenate value of `HOST_API` property to the current API endpoint from `API_ENDPOINTS` object, e.g. if `"CORS": true`, then returns `http://development.server.com/api/v1/user`, otherwhise will returns  `/api/v1/user`
 
  
 
