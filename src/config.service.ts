@@ -37,11 +37,7 @@ export class ConfigService {
     // Gets API route based on the provided key
     getApi(key: string): string {
         const ENDPOINT = this._config['API_ENDPOINTS'][key];
-        if (this._config['CORS'])
-            return this._config['HOST_API'] + ENDPOINT;
-        return this._config['PREFIX'] + ENDPOINT;
-
-
+        return this._config['HOST_API'] + ENDPOINT;
     }
     // Gets a value of specified property in the configuration file
     get(key: any) {
