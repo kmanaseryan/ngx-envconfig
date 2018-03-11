@@ -10,6 +10,20 @@ Configuration utility for Angular app.
 `npm install ngx-envconfig --save`
 
 
+## ConfigModule
+
+`ConfigModule` has `forRoot()` function which accepts `{state: string}` object. Based on the provided `state` value, it will load the approprate `*.json` config file. It assumes that configuration json files are located under `./src/assets/config` folder. Angular will bootstrap the app, only after the configuration `*.json` file is loaded.
+
+
+## ConfigService
+
+- **.get(propertyName: string): any**. Returns the corresponding value of the provided property `propertyName` config file. 
+- **.getEnv(): string**. Returns the current environment
+- **.isDevMode(): boolean**. Returns `true` if environment is development, otherwhise `false`
+- **.getApi(endpoint: string): string**. Return This function will only work if you have provided `"API_ENDPOINTS"` object in cofig file, which provides the list of available API endpoints and `"HOST_API"` which is the API's host URL.
+
+
+
 ## Getting Started   
 
 ### Setting up configuration files
@@ -20,10 +34,9 @@ Configuration utility for Angular app.
 ```json
 // src/assets/config/development.json
 {
-  "HOST_API": "http://development.server.com', <-- suppose this is your development server  
+  "HOST_API": "http://development.server.com",
   "API_ENDPOINTS": {
-    "USER": "/api/v1/user",
-    ...
+    "USER": "/api/v1/user"
   }
 }
 ```
@@ -32,10 +45,9 @@ Configuration utility for Angular app.
 ```json
 // src/assets/config/staging.json
 {
-  "HOST_API": "http://staging.server.com', <-- suppose this is your staging server  
+  "HOST_API": "http://staging.server.com",
   "API_ENDPOINTS": {
-    "USER": "/api/v1/user",
-    ...
+    "USER": "/api/v1/user"
   }
 }
 ```
@@ -44,15 +56,14 @@ Configuration utility for Angular app.
 ```json
 // src/assets/config/production.json
 {
-  "HOST_API": "http://producton.server.com', <-- suppose this is your production server  
+  "HOST_API": "http://production.server.com",
   "API_ENDPOINTS": {
-    "USER": "/api/v1/user",
-    ...
+    "USER": "/api/v1/user"
   }
 }
 ```
 
-### Usage
+### Usage without Angular environment variables
 
 ```javascript 
 // src/app/app.module.ts
@@ -94,14 +105,14 @@ export class AppComponent {
 
 ```
 
-## Using with Angular environment variables
+### Usage with Angular environment variables
 
 - Add the following snippet to `.angular-cli.json` file.
     ```json
     "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
+        "prod": "environments/environment.prod.ts",
         "staging": "environments/environment.staging.ts"
       }
     ```
@@ -149,20 +160,10 @@ export class AppComponent {
         export class AppModule { }
     ```
 
-Based on the provided `state` value in `environment.*.ts` file it will load the approprate `*.json` config file. Once the configuration `*.json` file is loaded, the Angular will bootstrap the app.
 
-### Build Environments (if you use env variables option)
+### Build Environments
 
-- `ng build --env=dev` builds for development environment. This is default if you don't specify.
+- `ng build --env=dev` builds for development environment. This is the default if you don't specify env value.
 - `ng build --env=staging` builds for staging environment. 
 - `ng build --env=prod` builds for production environment.
-
-
-## ConfigService
-
-- **get(propertyName: string): any**. Returns the corresponding value of the provided property `propertyName` config file. 
-- **getEnv(): string**. Returns the current environment
-- **isDevMode(): boolean**. Returns `true` if environment is development, otherwhise `false`
-- **getApi(endpoint: string): string**. Return This function will only work if you have provided `"API_ENDPOINTS"` object in cofig file, which provides the list of available API endpoints and `"HOST_API"` which is the API's host URL.
-
 
