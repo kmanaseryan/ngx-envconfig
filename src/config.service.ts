@@ -27,7 +27,7 @@ export class ConfigService {
         });
     }
     // Is app in the development mode?
-    isDevmode() {
+    isDevMode() {
         return this._env === 'development';
     }
     // Gets current env

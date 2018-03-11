@@ -5,41 +5,10 @@ Configuration utility for Angular based on the environment variables
 ## Installation
 `npm install ngx-envconfig --save`
 
+
 ## Getting Started   
 
 You can configure your project for staging, development and production environments, by taking advantage of Angular environment variables. To do so follow the following instructions.
-
-### Setting up Angular environment variables
-
-- Add the following snippet to `.angular-cli.json` file.
-    ```json
-    "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-        "staging": "environments/environment.staging.ts"
-      }
-    ```
-- Create the following files under `/environments` folder.
-
-    ```javascript
-    // ./environments/environment.prod.ts
-    export const environment = {
-    state: 'production'
-    };
-    ```
-    ```javascript
-    // ./environments/environment.staging.ts
-    export const environment = {
-    state: 'staging'
-    };
-    ```
-    ```javascript
-    // ./environments/environment.development.ts
-    export const environment = {
-    state: 'development'
-    };
-    ```
 
 ### Setting up configuration files
 
@@ -90,11 +59,9 @@ Based on the provided `state` value in `environment.*.ts` file `ConfigModule` wi
 import { NgModule } from '@angular/core';
 import { ConfigModule, ConfigService } from './config/config.service';
 
-import { environment } from '../src/environments/environment';
-
 @NgModule({
     imports: [
-        ConfigModule.forRoot(environment)
+        ConfigModule.forRoot({state: 'development'})
         ...
     ],
     providers: [
@@ -121,16 +88,81 @@ import { ConfigService } from 'ngx-envconfig';
 export class AppComponent {
   constructor(private configService: ConfigService){
       console.log(configService.get('HOST_API'))
-      // will print the HOST_API value depending on the provided env value 
-      console.log(configService.get('API_ENDPOINTS'))
-      // will print the array of API endpoints depending on the provided env value 
+      // prints: http://development.server.com
   }
 }
 
 ```
 
-## Build Environments
+## Using with Angular environment variables
+
+- Add the following snippet to `.angular-cli.json` file.
+    ```json
+    "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+        "staging": "environments/environment.staging.ts"
+      }
+    ```
+- Create the following files under `/environments` folder.
+
+    ```javascript
+    // ./environments/environment.prod.ts
+    export const environment = {
+        state: 'production'
+    };
+    ```
+    ```javascript
+    // ./environments/environment.staging.ts
+    export const environment = {
+        state: 'staging'
+    };
+    ```
+    ```javascript
+    // ./environments/environment.development.ts
+    export const environment = {
+        state: 'development'
+    };
+    ```
+- Then you can add environment value to `ConfigModule` like this:
+
+    ```javascript 
+        // src/app/app.module.ts
+        import { NgModule } from '@angular/core';
+        import { ConfigModule, ConfigService } from './config/config.service';
+
+        import { environment } from '../src/environments/environment'; // <-- add this line
+
+        @NgModule({
+            imports: [
+                ConfigModule.forRoot(environment) // <-- pass environment variable
+                ...
+            ],
+            providers: [
+                ...
+                Your Providers
+                ...
+            ]
+        })
+
+        export class AppModule { }
+    ```
+
+### Build Environments (if you use env variables option)
 
 - `ng build --env=dev` builds for development environment. This is default if you don't specify.
 - `ng build --env=staging` builds for staging environment. 
 - `ng build --env=prod` builds for production environment.
+
+
+## ConfigService
+
+- `get(propertyName: string): any`. Where `propertyName` is the first level property in the corresponding config file. 
+- `getEnv(): string`. Returns the current environment
+- `isDevMode(): boolean`. Return `true` if environment is development, otherwhise `false`
+- `getApi(endpoint: string): string`. This function will only work if you have `API_ENDPOINTS` array in cofig file, which provides the list of available API endpoints. Also it assumes that the there is `CORS` boolean property in config file which tells whether the HTTP requests will be done through cross origin, if it is set to `true` then will concatenate value of `HOST_API` property to the current API endpoint from `API_ENDPOINTS` array, e.g. if `"CORS": true`, then returns `http://development.server.com/api/v1/user`, otherwhise will returns  `/api/v1/user`
+
+ 
+
+
