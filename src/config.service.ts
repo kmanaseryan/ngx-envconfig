@@ -1,15 +1,17 @@
 import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, AsyncSubject } from 'rxjs';
 
 import { EnvConfig } from './env-config.service';
 
 @Injectable()
 export class ConfigService {
-
+    
     private _config: any;
     private _env: string;
 
+    readonly onLoad: AsyncSubject<boolean> = new AsyncSubject();
+    
     constructor(private _http: HttpClient, private envConfig: EnvConfig) { }
     load() {
         return new Promise((resolve, reject) => {
@@ -18,6 +20,8 @@ export class ConfigService {
             this._http.get('./assets/config/' + this._env + '.json')
                 .subscribe((data: any) => {
                     this._config = data;
+                    this.onLoad.next(true);
+                    this.onLoad.complete();
                     resolve(true);
                 },
                 (error: any) => {
