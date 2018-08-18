@@ -133,7 +133,7 @@ export class AppComponent {
     };
     ```
     ```javascript
-    // ./environments/environment.development.ts
+    // ./environments/environment.ts
     export const environment = {
         state: 'development'
     };
