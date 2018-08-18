@@ -143,7 +143,7 @@ export class AppComponent {
     ```javascript 
         // src/app/app.module.ts
         import { NgModule } from '@angular/core';
-        import { ConfigModule, ConfigService } from './config/config.service';
+        import { ConfigModule, ConfigService } from 'ngx-envconfig';
 
         import { environment } from '../src/environments/environment'; // <-- add this line
 
