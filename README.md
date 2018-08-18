@@ -10,6 +10,13 @@ Configuration utility for Angular app.
 `npm install ngx-envconfig --save`
 
 
+### Build Environments
+
+- `ng build --env=dev` builds for development environment. This is the default if you don't specify env value.
+- `ng build --env=staging` builds for staging environment. 
+- `ng build --env=prod` builds for production environment.
+
+
 ## ConfigModule
 
 `ConfigModule` has `forRoot()` function which accepts `{state: string}` object. Based on the provided `state` value, it will load the approprate `*.json` config file. It assumes that configuration json files are located under `./src/assets/config` folder. Angular will bootstrap the app, only after the configuration `*.json` file is loaded.
@@ -161,11 +168,4 @@ export class AppComponent {
 
         export class AppModule { }
     ```
-
-
-### Build Environments
-
-- `ng build --env=dev` builds for development environment. This is the default if you don't specify env value.
-- `ng build --env=staging` builds for staging environment. 
-- `ng build --env=prod` builds for production environment.
 
