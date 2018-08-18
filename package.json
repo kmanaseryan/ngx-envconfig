@@ -1,6 +1,6 @@
 {
   "name": "ngx-envconfig",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Configuration utility for Angular based on the environment variables ",
   "scripts": {
     "copy": "node tools/copy-package.js && node tools/cleanup-package.js",
