@@ -1,27 +1,48 @@
 # ngx-envconfig
 Configuration utility for Angular app.
 
+1. [ Features ](#features)
+2. [ Installation ](#isntall)
+3. [ Build Environments ](#build)
+4. [ API Reference ](#api)
+    
+    4.1 [ ConfigModule ](#module)
+    
+    4.2 [ ConfigService ](#service)
+5. [ Getting Started ](#started)
+
+    5.1 [ Setting up configuration files ](#configfiles)
+
+    5.2 [ Usage without Angular environment variables ](#without)
+
+    5.3 [ Usage with Angular environment variables ](#with)
+
+
 ## Features
 - Configure the project for **staging**, **development** and **production** environments, by taking advantage of [Angular](https://angular.io/) environment variables.
 - Initializ configuration, before whole application initialization process complete 
 - Simplified methods for getting back-end API endpoints  
 
+<a name="isntall"></a>
 ## Installation
 `npm install ngx-envconfig --save`
 
-
-### Build Environments
+<a name="build"></a>
+## Build Environments
 
 - `ng build --configuration=staging` builds for staging environment. For older versions `ng build --env=staging` 
 - `ng build --configuration=production` builds for production environment. For older versions `ng build --env=prod`
 
+<a name="api"></a>
+# API Reference
 
-## ConfigModule
+<a name="module"></a>
+### ConfigModule
 
 `ConfigModule` has `forRoot()` function which accepts `{state: string}` object. Based on the provided `state` value, it will load the approprate `*.json` config file. It assumes that configuration json files are located under `./src/assets/config` folder. Angular will bootstrap the app, only after the configuration `*.json` file is loaded.
 
-
-## ConfigService
+<a name="service"></a>
+### ConfigService
 
 - **.get(propertyName: string): any**. Returns the corresponding value of the provided property `propertyName` config file. 
     ```javascript
@@ -60,8 +81,10 @@ Configuration utility for Angular app.
     }
     ```
 
-## Getting Started   
+<a name="started"></a>
+# Getting Started   
 
+<a name="configfiles"></a>
 ### Setting up configuration files
 
 - Create `/config` folder under `/assets` directory
@@ -98,7 +121,7 @@ Configuration utility for Angular app.
   }
 }
 ```
-
+<a name="without"></a>
 ### Usage without Angular environment variables
 
 ```javascript 
@@ -142,7 +165,7 @@ export class AppComponent {
 }
 
 ```
-
+<a name="with"></a>
 ### Usage with Angular environment variables
 
 - Add *staging* configurations in `angular.json` file. Make sure *production* configuration is added. 
