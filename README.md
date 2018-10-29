@@ -1,6 +1,10 @@
 # ngx-envconfig
-Configuration utility for Angular app.
+Configuration utility for Angular app. [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Configuration%20utility%20for%20Angular%20apps&url=https://github.com/kmanaseryan/ngx-envconfig&hashtags=Angular,config,JavaScript,developers)
 
+
+> If you like the idea, please leave a Github star. 
+
+## Table of contents:
 1. [ Features ](#features)
 2. [ Installation ](#isntall)
 3. [ Build Environments ](#build)
