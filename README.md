@@ -55,7 +55,7 @@ Configuration utility for Angular app.
     ```javascript
     constructor(private config: ConfigService){
       this.config.onLoad.subscribe(()=>{
-          console.log('Config file is loaded);
+          console.log('Config file is loaded');
       })
     }
     ```
