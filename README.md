@@ -12,9 +12,8 @@ Configuration utility for Angular app.
 
 ### Build Environments
 
-- `ng build --env=dev` builds for development environment. This is the default if you don't specify env value.
-- `ng build --env=staging` builds for staging environment. 
-- `ng build --env=prod` builds for production environment.
+- `ng build --configuration=staging` builds for staging environment. For older versions `ng build --env=staging` 
+- `ng build --configuration=production` builds for production environment. For older versions `ng build --env=prod`
 
 
 ## ConfigModule
@@ -25,11 +24,41 @@ Configuration utility for Angular app.
 ## ConfigService
 
 - **.get(propertyName: string): any**. Returns the corresponding value of the provided property `propertyName` config file. 
+    ```javascript
+    constructor(private config: ConfigService){
+      console.log(this.config.get('HOST_API'))
+      // prints: 'http://development.server.com' in development mode  
+    }
+    ```
 - **.getEnv(): string**. Returns the current environment
+    ```javascript
+    constructor(private config: ConfigService){
+      console.log(this.config.getEnv())
+      // prints: 'development' in development mode
+    }
+    ```
 - **.isDevMode(): boolean**. Returns `true` if environment is development, otherwhise `false`
+    ```javascript
+    constructor(private config: ConfigService){
+      console.log(this.config.isDevMode())
+      // prints: true in development mode
+    }
+    ```
 - **.getApi(endpoint: string): string**. This function will only work if you have provided `"API_ENDPOINTS"` object in cofig file, which provides the list of available API endpoints and `"HOST_API"` which is the API's host URL. Returns API endpoint from  `"API_ENDPOINTS"` by concatenating it with `"HOST_API"`.
-
-
+    ```javascript
+    constructor(private config: ConfigService){
+      console.log(this.config.getApi('USER'))
+      // prints: 'http://development.server.com/api/v1/user' in development mode  
+    }
+    ```
+- **.onLoad: AsyncSubject<boolean> boolean**. Async subject to be subscribed. Emits when the config file is already loaded.
+    ```javascript
+    constructor(private config: ConfigService){
+      this.config.onLoad.subscribe(()=>{
+          console.log('Config file is loaded);
+      })
+    }
+    ```
 
 ## Getting Started   
 
@@ -116,7 +145,39 @@ export class AppComponent {
 
 ### Usage with Angular environment variables
 
-- Add the following snippet to `.angular-cli.json` file.
+- Add *staging* configurations in `angular.json` file. Make sure *production* configuration is added. 
+Default one we assume is the *development* configuration, which is points to `environment.ts` file.
+    ```json
+    ...
+    "projects": {
+        "YOUR APP NAME": {
+        "root": "",
+        ...
+            "architect": {
+                "build": {
+                ...
+                "configurations": {
+                    "production": {
+                        "fileReplacements": [
+                            {
+                            "replace": "src/environments/environment.ts",
+                            "with": "src/environments/environment.prod.ts"
+                            }
+                        ],
+                        ...
+                    },
+                    "staging": {
+                        "fileReplacements": [
+                            {
+                            "replace": "src/environments/environment.ts",
+                            "with": "src/environments/environment.staging.ts"
+                            }
+                        ]
+                    }
+    ...
+    }
+    ```
+- If you have older version of Anuglar then make the updates in `.angular-cli.json` file as follows:
     ```json
     "environmentSource": "environments/environment.ts",
       "environments": {
