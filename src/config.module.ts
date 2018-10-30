@@ -1,13 +1,14 @@
 import { Injectable, NgModule, ModuleWithProviders, APP_INITIALIZER, SkipSelf, Optional } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
 
 import { ConfigService } from './config.service';
-import { EnvConfig } from './env-config.service';
+import { EnvConfig } from './env-config';
+
+let _env: EnvConfig;
 
 export function ConfigFactory(config: ConfigService) {
-    const res = () => config.load();
+    const res = () => config.load(_env);
     return res;
 }
 
@@ -20,7 +21,6 @@ export function ConfigFactory(config: ConfigService) {
     ],
     providers: [
         ConfigService,
-        EnvConfig,
         {
             provide: APP_INITIALIZER,
             useFactory: ConfigFactory,
@@ -40,11 +40,9 @@ export class ConfigModule {
     }
 
     static forRoot(env: EnvConfig): ModuleWithProviders {
+        _env = env; 
         return {
-            ngModule: ConfigModule,
-            providers: [
-                { provide: EnvConfig, useValue: env }
-            ]
+            ngModule: ConfigModule
         };
     }
 }

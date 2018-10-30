@@ -2,24 +2,42 @@ import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, AsyncSubject } from 'rxjs';
 
-import { EnvConfig } from './env-config.service';
+import { EnvConfig } from './env-config';
+
 
 @Injectable()
 export class ConfigService {
     
     private _config: any;
     private _env: string;
+    private _fallbackConfig: any;
+    private _fallbackDev: boolean;
 
     readonly onLoad: AsyncSubject<boolean> = new AsyncSubject();
     
-    constructor(private _http: HttpClient, private envConfig: EnvConfig) { }
-    load() {
+    constructor(private _http: HttpClient) { }
+
+    load(env: EnvConfig) {
         return new Promise((resolve, reject) => {
-            this._env = this.envConfig.state;
             console.log(this._env)
+            this._env = env.state;
+            this._fallbackDev = env.fallbackDev || false;
+
+            let requestDevConfig: Observable<any>;
+            if(this._env != 'development' && env.fallbackDev){
+                requestDevConfig = this._http.get('./assets/config/development.json')
+            }
             this._http.get('./assets/config/' + this._env + '.json')
                 .subscribe((data: any) => {
                     this._config = data;
+                    if(requestDevConfig){
+                        return requestDevConfig.subscribe((res)=>{
+                            this._fallbackConfig = res;
+                            this.onLoad.next(true);
+                            this.onLoad.complete();
+                            resolve(true);        
+                        })
+                    }
                     this.onLoad.next(true);
                     this.onLoad.complete();
                     resolve(true);
@@ -35,16 +53,20 @@ export class ConfigService {
         return this._env === 'development';
     }
     // Gets current env
-    getEnv(key: any) {
+    getEnv() {
         return this._env;
     }
     // Gets API route based on the provided key
     getApi(key: string): string {
-        const ENDPOINT = this._config['API_ENDPOINTS'][key];
-        return this._config['HOST_API'] + ENDPOINT;
+        let ENDPOINT = this.get('API_ENDPOINTS')[key];
+        if(ENDPOINT === undefined && this._fallbackDev)
+            ENDPOINT = this._fallbackConfig['API_ENDPOINTS'][key];
+        return this.get('HOST_API') + ENDPOINT;
     }
     // Gets a value of specified property in the configuration file
     get(key: any) {
+        if(this._config[key] === undefined && this._fallbackDev)
+            return this._fallbackConfig[key];
         return this._config[key];
     }
 }

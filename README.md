@@ -44,7 +44,7 @@ Configuration utility for Angular app. [![Tweet](https://img.shields.io/twitter/
 <a name="module"></a>
 ### ConfigModule
 
-- **.forRoot(envConfig: EnvConfig)** Based on the provided `envConfig.state` value, it will load the approprate `*.json` config file. It assumes that configuration json files are located under `./src/assets/config` folder. Angular will bootstrap the app, only after the configuration `*.json` file is loaded.
+- *.forRoot(envConfig: EnvConfig)* Based on the provided `envConfig.state` value, it will load the approprate `*.json` config file. It assumes that configuration json files are located under `./src/assets/config` folder. Angular will bootstrap the app, only after the configuration `*.json` file is loaded.
 
 ### EnvConfig
 
@@ -270,19 +270,19 @@ Default one we assume is the *development* configuration, which is points to `en
 
     @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+        templateUrl: './app.component.html',
+        styleUrls: ['./app.component.css']
     })
     export class AppComponent {
-    constructor(private configService: ConfigService){
-        console.log(configService.get('HOST_API'))
-        // prints: http://development.server.com
-        // prints: http://production.server.com if the state is production
+        constructor(private configService: ConfigService){
+            console.log(configService.get('HOST_API'))
+            // prints: http://development.server.com
+            // prints: http://production.server.com if the state is production
 
-        console.log(configService.getApi('USERS'))
-        // prints: http://development.server.com/api/v1/users
-        // prints: http://production.server.com/api/v1/users if the state is production
-    }
+            console.log(configService.getApi('USERS'))
+            // prints: http://development.server.com/api/v1/users
+            // prints: http://production.server.com/api/v1/users if the state is production
+        }
     }
 
     ```
