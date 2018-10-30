@@ -1,55 +1,87 @@
 {
-  "name": "ngx-envconfig",
-  "version": "1.1.1",
-  "description": "Configuration utility for Angular based on the environment variables ",
-  "scripts": {
-    "copy": "node tools/copy-package.js && node tools/cleanup-package.js",
-    "postbundle": "node tools/removecode.js",
-    "transpile": "ngc",
-    "package": "rollup -c",
-    "minify": "uglifyjs dist/bundles/ngxenvconfig.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ngxenvconfig.umd.min.js",
-    "build": "npm run transpile && npm run package && npm run minify && npm run copy"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kmanaseryan/ngx-envconfig.git"
-  },
-  "keywords": [
-    "APP_INITIALIZER",
-    "app config",
-    "configuration",
-    "settings",
-    "config",
-    "angular",
-    "configmodule",
-    "ngx-config",
-    "env-config",
-    "app initializer"
-  ],
-  "author": {
-    "name": "Karlen Manaseryan",
-    "email": "kmanaseryan@gmial.com"
-  },
-  "dependencies": {},
-  "peerDependencies": {
-    "rxjs": "^5.5.2",
-    "@angular/common": ">=4.0.0 <7",
-    "@angular/core": ">=4.0.0 <7",
-    "@angular/platform-browser-dynamic": ">=4.0.0 <7"
-  },
-  "main": "./bundles/core.umd.js",
-  "module": "./ngx-envconfig/core.es5.js",
-  "es2015": "./ngx-envconfig/core.js",
-  "typings": "./core.d.ts",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kmanaseryan/ngx-envconfig/issues"
-  },
-  "homepage": "https://github.com/kmanaseryan/ngx-envconfig#readme",
-  "devDependencies": {
-    "rollup": "0.56.5",
-    "tslib": "~1.8.1",
-    "typescript": "2.7.2",
-    "uglify-js": "3.3.14"
-  }
+    "name": "ngx-envconfig",
+    "version": "1.1.1",
+    "description": "Configuration utility for Angular based on the environment variables ",
+    "scripts": {
+        "copy": "node tools/copy-package.js && node tools/cleanup-package.js",
+        "postbundle": "node tools/removecode.js",
+        "transpile": "ngc",
+        "package": "rollup -c",
+        "minify": "uglifyjs dist/bundles/ngxenvconfig.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/ngxenvconfig.umd.min.js",
+        "build": "npm run transpile && npm run package && npm run minify && npm run copy"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/kmanaseryan/ngx-envconfig.git"
+    },
+    "keywords": [
+        "APP_INITIALIZER",
+        "app config",
+        "configuration",
+        "settings",
+        "config",
+        "angular",
+        "configmodule",
+        "ngx-config",
+        "env-config",
+        "app initializer"
+    ],
+    "author": {
+        "name": "Karlen Manaseryan",
+        "email": "kmanaseryan@gmial.com"
+    },
+    "dependencies": {},
+    "peerDependencies": {
+        "rxjs": ">=4.0.0 <8.0.0",
+        "@angular/common": ">=4.0.0 <8.0.0",
+        "@angular/compiler": ">=4.0.0 <8.0.0"
+    },
+    "main": "./bundles/core.umd.js",
+    "module": "./ngx-envconfig/core.es5.js",
+    "es2015": "./ngx-envconfig/core.js",
+    "typings": "./core.d.ts",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/kmanaseryan/ngx-envconfig/issues"
+    },
+    "homepage": "https://github.com/kmanaseryan/ngx-envconfig#readme",
+    "devDependencies": {
+        "@angular/animations": "~7.0.0",
+        "@angular/common": "~7.0.0",
+        "@angular/compiler": "~7.0.0",
+        "@angular/core": "~7.0.0",
+        "@angular/forms": "~7.0.0",
+        "@angular/http": "~7.0.0",
+        "@angular/platform-browser": "~7.0.0",
+        "@angular/platform-browser-dynamic": "~7.0.0",
+        "@angular/router": "~7.0.0",
+        "core-js": "^2.5.4",
+        "rxjs": "~6.3.3",
+        "zone.js": "~0.8.26",
+        "@angular-devkit/build-angular": "~0.10.0",
+        "@angular-devkit/build-ng-packagr": "~0.10.0",
+        "@angular/cli": "~7.0.3",
+        "@angular/compiler-cli": "~7.0.0",
+        "@angular/language-service": "~7.0.0",
+        "@types/jasmine": "~2.8.8",
+        "@types/jasminewd2": "~2.0.3",
+        "@types/node": "~8.9.4",
+        "codelyzer": "~4.5.0",
+        "jasmine-core": "^2.99.1",
+        "jasmine-spec-reporter": "~4.2.1",
+        "karma": "^3.0.0",
+        "karma-chrome-launcher": "^2.2.0",
+        "karma-coverage-istanbul-reporter": "~2.0.1",
+        "karma-jasmine": "^1.1.2",
+        "karma-jasmine-html-reporter": "^0.2.2",
+        "ng-packagr": "^4.2.0",
+        "protractor": "~5.4.0",
+        "rollup": "0.56.5",
+        "ts-node": "~7.0.0",
+        "tsickle": ">=0.29.0",
+        "tslib": "^1.9.0",
+        "tslint": "~5.11.0",
+        "typescript": "~3.1.1",
+        "uglify-js": "3.3.14"
+    }
 }
