@@ -1,5 +1,5 @@
 # ngx-envconfig
-Configuration utility for Angular app. [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Configuration%20utility%20for%20Angular%20apps&url=https://github.com/kmanaseryan/ngx-envconfig&hashtags=Angular,config,JavaScript,developers)
+Configuration utility for Angular app based on the environment variables. [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Configuration%20utility%20for%20Angular%20apps&url=https://github.com/kmanaseryan/ngx-envconfig&hashtags=Angular,config,JavaScript,developers)
 
 
 > If you like the idea, please leave a Github star. 
@@ -134,7 +134,7 @@ Configuration utility for Angular app. [![Tweet](https://img.shields.io/twitter/
 ```javascript 
 // src/app/app.module.ts
 import { NgModule } from '@angular/core';
-import { ConfigModule, ConfigService } from './config/config.service';
+import { ConfigModule } from 'ngx-envconfig';
 
 @NgModule({
     imports: [
@@ -242,7 +242,7 @@ Default one we assume is the *development* configuration, which is points to `en
     ```javascript 
         // src/app/app.module.ts
         import { NgModule } from '@angular/core';
-        import { ConfigModule, ConfigService } from 'ngx-envconfig';
+        import { ConfigModule } from 'ngx-envconfig';
 
         import { environment } from '../src/environments/environment'; // <-- add this line
 
