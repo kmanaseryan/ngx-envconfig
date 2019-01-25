@@ -1,5 +1,5 @@
 
-export interface EnvConfig {
+export class EnvConfig {
     state: string;
     fallbackDev?: boolean;
 }

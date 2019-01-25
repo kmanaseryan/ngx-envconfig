@@ -19,7 +19,6 @@ export class ConfigService {
 
     load(env: EnvConfig) {
         return new Promise((resolve, reject) => {
-            console.log(this._env)
             this._env = env.state;
             this._fallbackDev = env.fallbackDev || false;
 
