@@ -26,6 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Environment (please complete the following information):**
  - Angular version [e.g. v8.0.0]
  - Version [e.g. 22]
+ - TypeScript version
 
 
 **Additional context**
