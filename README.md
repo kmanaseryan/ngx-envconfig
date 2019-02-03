@@ -4,8 +4,8 @@ Configuration utility for Angular app based on the environment variables. [![Twe
 
 > If you like the idea, please leave a Github star. 
 
-## Using JSON files configure your app like a boss
-Specify a list of API endpoints in the JSON and use the values from your code. 
+## Using JSON files configure your Angular app like a BOSS!
+Specify a list of API endpoints in the JSON and get them in your code with ease.
 
 ![](demo1.gif)
 
