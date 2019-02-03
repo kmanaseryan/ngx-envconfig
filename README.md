@@ -2,8 +2,6 @@
 Configuration utility for Angular app based on the environment variables. [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Configuration%20utility%20for%20Angular%20apps&url=https://github.com/kmanaseryan/ngx-envconfig&hashtags=Angular,config,JavaScript,developers)
 
 
-> If you like the idea, please leave a Github star. 
-
 ## Using JSON files configure your Angular app like a BOSS!
 Specify a list of API endpoints in the JSON and get them in your code with ease.
 
@@ -12,6 +10,12 @@ Specify a list of API endpoints in the JSON and get them in your code with ease.
 Look how beautiful is your code :blush: 
 
 ![](demo2.gif)
+
+Configuring your app for each environment be like: 
+
+![](demo3.gif)
+
+> Did you like it? Please put a Github star to support. 
 
 ## Table of contents:
 1. [ Features ](#features)
